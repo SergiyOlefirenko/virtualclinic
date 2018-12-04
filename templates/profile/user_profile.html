@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{profile.first_name}} {{profile.last_name}} - User profile page{% endblock%}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">User profile</li>
+{% endblock %}
+
+{% block content %}
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th colspan="2">
+                    <div class="row">
+                        <div class="col-sm">
+                            <h3>User profile: {{profile.first_name}} {{profile.last_name}}</h3>
+                        </div>
+                        <div class="col-sm">
+                            <a href="{% url 'update_profile' profile.pk %}" class="btn btn-primary ml-2">Update profile</a>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">First name</th>
+                <td>{{ profile.first_name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Last name</th>
+                <td>{{ profile.last_name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Phone number</th>
+                <td>{{ profile.phone_number }}</td>
+            </tr>
+            <tr>
+                <th scope="row>">Gender</th>
+                <td>{{ profile.get_gender_display }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Marital status</th>
+                <td>{{ profile.get_marital_status_display }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Birth date</th>
+                <td>{{ profile.birth_date }}</td>
+            </tr>
+            <tr>
+                <th scope="row>">Address</th>
+                <td>{{ profile.address }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Notes</th>
+                <td>{{ profile.note }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

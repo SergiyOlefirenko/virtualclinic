@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Virtual Clinic - Contacts{% endblock%}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">Contacts</li>
+{% endblock %}
+
+{% block content %}
+    {% for contact in contacts %}
+        <div class="card">
+            <div class="card-header">
+                {{ contact.clinic_name }}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ contact.clinic_address }}</li>
+                <li class="list-group-item">{{ contact.clinic_phone_number }}</li>
+                <li class="list-group-item">{{ contact.clinic_email }}</li>
+            </ul>
+        </div>
+        <p></p>
+    {% endfor%}
+
+{% endblock %}

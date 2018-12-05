@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from .models import *
 
 from .forms import SingUpForm, UpdateProfileForm
@@ -38,3 +39,13 @@ def update_profile(request, pk):
     else:
         form = UpdateProfileForm(instance=profile)
     return render(request, 'profile/update_profile.html', {'profile': profile, 'form': form})
+
+
+@login_required
+def redirect_view(request):
+    user_groups = list(request.user.groups.values_list('name', flat=True))
+
+    if 'Doctors' in user_groups:
+        return redirect(reverse('doctor_home'))
+    else:
+        return redirect(reverse('home'))

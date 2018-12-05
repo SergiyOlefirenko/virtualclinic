@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from accounts.models import UserProfile
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -23,12 +24,14 @@ class AboutInfo(models.Model):
 
 class Department(models.Model):
     department = models.CharField(max_length=200)
+    description = models.TextField(max_length=400)
 
     def __str__(self):
         return self.department
 
 
 class Doctor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, blank=True, null=True)
@@ -63,7 +66,7 @@ class Appointment(models.Model):
     status = models.ForeignKey(AppointmentStatus, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return self.startDateTime + ' ' + self.endDateTime
+        return self.description
 
 
 class FeedbackRate(models.Model):
@@ -74,13 +77,20 @@ class FeedbackRate(models.Model):
 
 
 class PatientFeedback(models.Model):
-    patient = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, blank=True, null=True)
+    patient = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, blank=True, null=True)
     rate = models.ForeignKey(FeedbackRate, on_delete=models.SET_NULL, blank=True, null=True)
     feedback = models.TextField(max_length=4000)
 
 
-class PatientDoctorMessage(models.Model):
-    patient = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, blank=True, null=True)
+class Chat(models.Model):
+    patient = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, blank=True, null=True)
+
+
+class Message(models.Model):
+    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
+    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
+    inclusion_date = models.DateTimeField()
     message = models.CharField(max_length=250)
+    chat = models.OneToOneField(Chat, on_delete=models.CASCADE)

@@ -50,4 +50,8 @@ urlpatterns = [
     url(r'accounts/profile/(\d+)/$', accounts_views.user_profile, name='user_profile'),
     url(r'accounts/profile/(?P<pk>\d+)/update/$', accounts_views.update_profile, name='update_profile'),
     url(r'^contacts/$', clinic_views.contacts_info, name='contacts_info'),
+    # redirect url
+    url(r'^redirect_view/$', accounts_views.redirect_view, name='redirect_view'),
+    # doctor urls
+    url(r'^doctor/home/$', clinic_views.doctor_home, name='doctor_home'),
 ]

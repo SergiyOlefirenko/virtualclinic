@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Virtual clinic webapp - Departments{% endblock%}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">Departments</li>
+{% endblock %}
+
+{% block content %}
+<div class="card-columns">
+    {% for department in departments %}
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{% static department.logo %}" alt="Card image cap">
+            <div class="card-header">
+                <h5 class="card-title">{{ department.department }}</h5>
+            </div>
+            <div class="card-boy">
+                <p class="card-text">{{ department.description }}</p>
+            </div>
+            <div class="card-body">
+                <a href="#" class="card-link">Doctors</a>
+                <a href="#" class="card-link">Department details</a>
+            </div>
+        </div>
+    {% empty %}
+        No departments available right now!
+    {% endfor %}
+</div>
+{% endblock %}

@@ -25,6 +25,7 @@ class AboutInfo(models.Model):
 class Department(models.Model):
     department = models.CharField(max_length=200)
     description = models.TextField(max_length=400)
+    logo = models.CharField(max_length=250)
 
     def __str__(self):
         return self.department

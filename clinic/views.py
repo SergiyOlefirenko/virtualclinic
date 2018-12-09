@@ -17,3 +17,9 @@ def contacts_info(request):
 @login_required
 def doctor_home(request):
     return render(request, 'doctor/doctor_home.html')
+
+
+@login_required
+def department_list(request):
+    departments = Department.objects.all()
+    return render(request, 'clinic/department/department_list.html', {'departments': departments})

@@ -11,17 +11,16 @@
 {% block content %}
 <div class="card-columns">
     {% for department in departments %}
-
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 21rem;">
             <img class="card-img-top" src="{% static department.logo %}" alt="Card image cap">
             <div class="card-header">
                 <h5 class="card-title">{{ department.department }}</h5>
             </div>
-            <div class="card-boy">
+            <div class="card-block">
                 <p class="card-text">{{ department.description }}</p>
             </div>
-            <div class="card-body">
-                <a href="#" class="card-link">Doctors</a>
+            <div class="card-footer">
+                <a href="{% url 'department_doctors' department.pk %}" class="card-link">Doctors</a>
                 <a href="#" class="card-link">Department details</a>
             </div>
         </div>

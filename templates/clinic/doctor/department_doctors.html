@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Virtual clinic webapp - Doctors{% endblock%}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'department_list' %}">Departments</a></li>
+    <li class="breadcrumb-item">{{ department.department }}</li>
+    <li class="breadcrumb-item active">Doctors</li>
+{% endblock %}
+
+{% block content %}
+<div class="card-columns">
+    {% for doctor in department.doctors.all %}
+    <div class="card" style="width: 21rem;">
+        <img class="card-img-top" src="{% static doctor.img %}" alt="Card image cap">
+        <div class="card-header">
+            <h5 class="card-title">{{ doctor.first_name }} {{ doctor.last_name }}</h5>
+        </div>
+        <div class="card-block">
+            <p class="card-text">{{ doctor.description }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="#" class="card-link">Create appointment</a>
+        </div>
+    </div>
+    {% empty %}
+        No doctors available right now!
+    {% endfor %}
+</div>
+{% endblock %}

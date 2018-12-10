@@ -35,7 +35,9 @@ class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    department = models.ForeignKey(Department, on_delete=models.SET_NULL, blank=True, null=True)
+    img = models.CharField(max_length=250)
+    description = models.TextField(max_length=450)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, blank=True, null=True, related_name='doctors')
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name

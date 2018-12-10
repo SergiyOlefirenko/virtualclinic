@@ -54,6 +54,7 @@ urlpatterns = [
     url(r'^redirect_view/$', accounts_views.redirect_view, name='redirect_view'),
     # doctor urls
     url(r'^doctor/home/$', clinic_views.doctor_home, name='doctor_home'),
+    url(r'^clinic/departments/(?P<pk>\d+)/doctors/$', clinic_views.department_doctors, name='department_doctors'),
     # departments
     url(r'^clinic/departments/$', clinic_views.department_list, name='department_list'),
 ]

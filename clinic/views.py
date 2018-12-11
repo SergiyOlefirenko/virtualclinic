@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
+from .filter import PatientFilter
 from .models import *
 
 
@@ -29,3 +29,15 @@ def department_list(request):
 def department_doctors(request, pk):
     department = get_object_or_404(Department, pk=pk)
     return render(request, 'clinic/doctor/department_doctors.html',  {'department': department},)
+
+
+@login_required
+def patient_search(request):
+    patients = UserProfile.objects.all()
+    patient_filter = PatientFilter(request.GET, queryset=patients)
+    return render(request, 'includes/patient_search_form.html', {'filter': patient_filter})
+
+
+@login_required
+def reception_home(request):
+    return render(request, 'clinic/reception/reception_home.html')

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'clinic',
     'widget_tweaks',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

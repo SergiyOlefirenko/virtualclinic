@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
-
 {% block title %}
-    Homepage - {{ block.super }}
+    Virtual clinic web app - Reception
 {% endblock title %}
 
 {% block breadcrumb %}
 {% endblock %}
 
 {% block content %}
-    <h2>Doctor home page</h2>
+    <h2>Reception home page</h2>
+
+    <a href="{% url 'patient_search' %}">Search patient</a>
 {% endblock %}

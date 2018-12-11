@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
+
 {% block title %}
     Homepage - {{ block.super }}
 {% endblock title %}
 
 {% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'doctor_home' %}">Home</a></li>
 {% endblock %}
 
 {% block content %}

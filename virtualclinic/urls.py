@@ -50,11 +50,20 @@ urlpatterns = [
     url(r'accounts/profile/(\d+)/$', accounts_views.user_profile, name='user_profile'),
     url(r'accounts/profile/(?P<pk>\d+)/update/$', accounts_views.update_profile, name='update_profile'),
     url(r'^contacts/$', clinic_views.contacts_info, name='contacts_info'),
+    #
     # redirect url
     url(r'^redirect_view/$', accounts_views.redirect_view, name='redirect_view'),
+    #
     # doctor urls
     url(r'^doctor/home/$', clinic_views.doctor_home, name='doctor_home'),
     url(r'^clinic/departments/(?P<pk>\d+)/doctors/$', clinic_views.department_doctors, name='department_doctors'),
+    #
     # departments
     url(r'^clinic/departments/$', clinic_views.department_list, name='department_list'),
+    #
+    # reception urls
+    url(r'^reception/$', clinic_views.reception_home, name='reception_home'),
+    #
+    # search urls
+    url(r'search/$', clinic_views.patient_search, name='patient_search'),
 ]

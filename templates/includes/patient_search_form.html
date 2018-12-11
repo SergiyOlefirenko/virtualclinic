@@ -1,0 +1,15 @@
+{% extends 'clinic/reception/reception_home.html' %}
+
+{% load static %}
+
+{% block content %}
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+  {% for patient in filter.qs %}
+    <li>{{ patient.first_name }} - {{ patient.last_name }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

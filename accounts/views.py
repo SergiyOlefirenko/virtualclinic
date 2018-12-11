@@ -47,5 +47,7 @@ def redirect_view(request):
 
     if 'Doctors' in user_groups:
         return redirect(reverse('doctor_home'))
+    elif 'Reception' in user_groups:
+        return redirect(reverse('reception_home'))
     else:
         return redirect(reverse('home'))

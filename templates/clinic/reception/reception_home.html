@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+    Virtual clinic web app - Reception
+{% endblock title %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'reception_home' %}">Home</a></li>
+{% endblock %}
+
+{% block content %}
+    <h2>Reception home page</h2>
+
+    <a href="{% url 'patient_search' %}">Search patient</a>
+{% endblock %}

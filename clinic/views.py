@@ -20,9 +20,9 @@ def doctor_home(request):
 
 
 @login_required
-def department_list(request):
+def patient_department_list(request):
     departments = Department.objects.all()
-    return render(request, 'clinic/department/department_list.html', {'departments': departments})
+    return render(request, 'clinic/patient/patient_department_list.html', {'departments': departments})
 
 
 @login_required
@@ -41,3 +41,10 @@ def patient_search(request):
 @login_required
 def reception_home(request):
     return render(request, 'clinic/reception/reception_home.html')
+
+
+@login_required
+def patient_appointment_list(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    appointments = user.patient.patient_appointments.all()
+    return render(request, 'clinic/patient/patient_appointment_list.html', {'appointments': appointments})

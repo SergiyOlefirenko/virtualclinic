@@ -14,17 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.conf.urls import url
+from django.conf.urls import url, include
 from accounts import views as accounts_views
 from clinic import views as clinic_views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', clinic_views.home, name='home'),
     url(r'^signup/$', accounts_views.signup, name='signup'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
-    url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    url(r'^$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^reset/$',
         auth_views.PasswordResetView.as_view(
             template_name='password_reset/password_reset.html',
@@ -49,21 +48,22 @@ urlpatterns = [
         name='password_change_done'),
     url(r'accounts/profile/(\d+)/$', accounts_views.user_profile, name='user_profile'),
     url(r'accounts/profile/(?P<pk>\d+)/update/$', accounts_views.update_profile, name='update_profile'),
-    url(r'^contacts/$', clinic_views.contacts_info, name='contacts_info'),
+    url(r'^clinic/contacts/$', clinic_views.contacts_info, name='contacts_info'),
     #
     # redirect url
     url(r'^redirect_view/$', accounts_views.redirect_view, name='redirect_view'),
     #
+    # patient urls
+    url(r'^clinic/patient/$', clinic_views.home, name='home'),
+    #
     # doctor urls
-    url(r'^doctor/home/$', clinic_views.doctor_home, name='doctor_home'),
+    url(r'^clinic/doctor/$', clinic_views.doctor_home, name='doctor_home'),
     url(r'^clinic/departments/(?P<pk>\d+)/doctors/$', clinic_views.department_doctors, name='department_doctors'),
     #
-    # departments
-    url(r'^clinic/departments/$', clinic_views.department_list, name='department_list'),
-    #
     # reception urls
-    url(r'^reception/$', clinic_views.reception_home, name='reception_home'),
+    url(r'^clinic/reception/$', clinic_views.reception_home, name='reception_home'),
     #
     # search urls
     url(r'search/$', clinic_views.patient_search, name='patient_search'),
+    url(r'^clinic/', include('clinic.urls')),
 ]

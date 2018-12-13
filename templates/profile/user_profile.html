@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'home.html' %}
 
 {% load static %}
 
@@ -50,7 +50,7 @@
             </tr>
             <tr>
                 <th scope="row">Birth date</th>
-                <td>{{ profile.birth_date }}</td>
+                <td>{{ profile.birth_date|date:"Y-F-j" }}</td>
             </tr>
             <tr>
                 <th scope="row>">Address</th>

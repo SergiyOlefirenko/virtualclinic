@@ -15,7 +15,7 @@ class UserProfile(models.Model):
         ('D', 'Divorced'),
         ('W', 'Widowed')
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='patient')
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     phone_regex = RegexValidator(
@@ -27,6 +27,7 @@ class UserProfile(models.Model):
     birth_date = models.DateTimeField('birth_date')
     address = models.CharField(max_length=250)
     note = models.TextField(max_length=4000)
+    photo = models.CharField(max_length=250, default='img/patients/def_patient.jpeg')
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name

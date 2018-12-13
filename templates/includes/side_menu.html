@@ -1,0 +1,5 @@
+<h3>Side menu</h3>
+<nav class="nav flex-column">
+    <a class="nav-link" href="{% url 'patient_department_list' %}">Departments</a>
+    <a class="nav-link" href="{% url 'patient_appointment_list' user.pk %}">Appointments</a>
+</nav>

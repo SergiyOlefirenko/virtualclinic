@@ -60,8 +60,8 @@ class Service(models.Model):
 
 
 class Appointment(models.Model):
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor_appointments')
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='patient_appointments')
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     description = models.CharField(max_length=250)
     startDateTime = models.DateTimeField()

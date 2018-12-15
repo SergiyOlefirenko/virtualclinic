@@ -1,5 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy, reverse
+from django.views.generic import CreateView, View, ListView, DetailView
+from django.utils.decorators import method_decorator
+from clinic.forms import AppointmentForm
 from .filter import PatientFilter
 from .models import *
 
@@ -46,5 +50,19 @@ def reception_home(request):
 @login_required
 def patient_appointment_list(request, pk):
     user = get_object_or_404(User, pk=pk)
-    appointments = user.patient.patient_appointments.all()
+    appointments = user.patient.patient_appointments.order_by('-startDateTime')
     return render(request, 'clinic/patient/patient_appointment_list.html', {'appointments': appointments})
+
+
+@method_decorator(login_required, name='dispatch')
+class NewAppointmentView(CreateView):
+    model = Appointment
+    # fields = '__all__'
+    form_class = AppointmentForm
+    template_name = 'clinic/appointment/new_appointment.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class AppointmentDetailsView(DetailView):
+    model = Appointment
+    template_name = 'clinic/appointment/appointment_details.html'

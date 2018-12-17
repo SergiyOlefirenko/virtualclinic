@@ -1,4 +1,14 @@
-<table class="table table-striped">
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}{{ appointment.description }}{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">{{ appointment.description }}</li>
+{% endblock %}
+
+{% block content %}
+    <table class="table table-striped">
     <thead class="thead-dark">
         <tr>
             <th scope="col">Date</th>
@@ -9,27 +19,22 @@
             <th scope="col">Patient</th>
             <th scope="col">Service</th>
             <th scope="col">Status</th>
-            <th scope="col">Manage</th>
         </tr>
     </thead>
     <tbody>
-        {% for appointment in appointments %}
             <tr>
                 <th scope="row">{{ appointment.startDateTime|date:"SHORT_DATE_FORMAT" }}</th>
                 <td>{{ appointment.startDateTime|date:"H:i" }} - {{ appointment.endDateTime|date:"H:i" }}</td>
-                <td><a href="{% url 'appointment_details' appointment.pk %}">{{ appointment.description }}</a></td>
+                <td>{{ appointment.description }}</td>
                 <td>{{ appointment.doctor.department.department }}</td>
                 <td>{{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</td>
                 <td>{{ appointment.user.first_name }} {{appointment.user.last_name }}</td>
                 <td>{{ appointment.service.serviceName }}</td>
 
                 <td>{{ appointment.status.statusTitle }}</td>
-                <td><a href="{% url 'appointment_details' appointment.pk %}">Details</a> <a href="{% url 'appointment_edit' appointment.pk %}">Edit</a></td>
             </tr>
-        {% empty %}
-            <tr>
-                <td colspan="9">No appointments right now!</td>
-            </tr>
-        {% endfor %}
     </tbody>
 </table>
+
+<a href="{% url 'appointment_edit' appointment.pk %}">Edit</a>
+{% endblock %}

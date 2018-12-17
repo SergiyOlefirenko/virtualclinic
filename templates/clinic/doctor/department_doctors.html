@@ -5,7 +5,7 @@
 {% block title %}Virtual clinic webapp - Doctors{% endblock%}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{% url 'department_list' %}">Departments</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'patient_department_list' %}">Departments</a></li>
     <li class="breadcrumb-item">{{ department.department }}</li>
     <li class="breadcrumb-item active">Doctors</li>
 {% endblock %}

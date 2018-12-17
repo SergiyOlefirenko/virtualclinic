@@ -2,12 +2,13 @@
 
 {% load static %}
 
-{% block title %}Virtual clinic webapp - customer appointments{% endblock%}
+{% block title %}Virtual clinic webapp - {{ user.patient }} appointments{% endblock%}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item active">Appointments</li>
 {% endblock %}
 
 {% block content %}
+    <h3>{{ user.patient }} - Appointments</h3>
     {% include 'clinic/appointment/appointment_list.html' %}
 {% endblock %}

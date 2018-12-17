@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, View, ListView, DetailView
+from django.views.generic import CreateView, View, ListView, DetailView, UpdateView
 from django.utils.decorators import method_decorator
 from clinic.forms import AppointmentForm
 from .filter import PatientFilter
@@ -66,3 +66,10 @@ class NewAppointmentView(CreateView):
 class AppointmentDetailsView(DetailView):
     model = Appointment
     template_name = 'clinic/appointment/appointment_details.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class EditAppointmentView(UpdateView):
+    model = Appointment
+    form_class = AppointmentForm
+    template_name = 'clinic/appointment/update_appointment.html'

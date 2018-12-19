@@ -73,7 +73,7 @@ class Appointment(models.Model):
         return self.description
 
     def get_absolute_url(self):
-        return reverse('appointment_details', kwargs={'pk': self.pk})
+        return reverse('patient_appointment_list', kwargs={'pk': self.user.user.pk})
 
 
 class FeedbackRate(models.Model):

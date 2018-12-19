@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'appointment/new/$', clinic_views.NewAppointmentView.as_view(), name='new_appointment'),
     url(r'appointment/(?P<pk>\d+)/$', clinic_views.AppointmentDetailsView.as_view(), name='appointment_details'),
     url(r'appointment/(?P<pk>\d+)/edit/$', clinic_views.EditAppointmentView.as_view(), name='appointment_edit'),
-    # url(r'appointment/(?P<pk>\d+)/delete/$', clinic_views.AppointmentDeleteView.as_view(), name='appointment_delete'),
+    url(r'appointment/(?P<pk>\d+)/delete/$', clinic_views.DeleteAppointmentView.as_view(), name='appointment_delete'),
 ]

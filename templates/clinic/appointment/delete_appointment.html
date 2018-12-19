@@ -1,0 +1,23 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}Delete appointment{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">Delete appointment</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action=".">
+        {% csrf_token %}
+        <div class="card border-danger mb-3" style="max-width: 21rem;">
+            <div class="card-header">{{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }} on {{ appointment.startDateTime|date:"SHORT_DATE_FORMAT" }} from {{ appointment.startDateTime|date:"H:i" }} to {{ appointment.endDateTime|date:"H:i" }}</div>
+            <div class="card-body">
+                <h5 class="card-title">Do you want to delete current appointment?</h5>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+
+
+    </form>
+{% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, View, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, View, ListView, DetailView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
 from clinic.forms import AppointmentForm
 from .filter import PatientFilter
@@ -73,3 +73,16 @@ class EditAppointmentView(UpdateView):
     model = Appointment
     form_class = AppointmentForm
     template_name = 'clinic/appointment/update_appointment.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class DeleteAppointmentView(DeleteView):
+    template_name = 'clinic/appointment/delete_appointment.html'
+
+    def get_object(self):
+        pk_ = self.kwargs.get("pk")
+        return get_object_or_404(Appointment, pk=pk_)
+
+    def get_success_url(self):
+        patient_pk_ = self.request.user.pk
+        return reverse('patient_appointment_list', args=[patient_pk_])

@@ -24,7 +24,10 @@
                 <td>{{ appointment.service.serviceName }}</td>
 
                 <td>{{ appointment.status.statusTitle }}</td>
-                <td><a href="{% url 'appointment_details' appointment.pk %}">Details</a> <a href="{% url 'appointment_edit' appointment.pk %}">Edit</a></td>
+                <td><a href="{% url 'appointment_details' appointment.pk %}">Details</a>
+                    <a href="{% url 'appointment_edit' appointment.pk %}">Edit</a>
+                    <a href="{% url 'appointment_delete' appointment.pk %}">Delete</a>
+                </td>
             </tr>
         {% empty %}
             <tr>

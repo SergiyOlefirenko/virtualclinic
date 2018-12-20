@@ -101,3 +101,8 @@ class Message(models.Model):
     inclusion_date = models.DateTimeField()
     message = models.CharField(max_length=250)
     chat = models.OneToOneField(Chat, on_delete=models.CASCADE)
+
+
+class FamilyDoctor(models.Model):
+    patient = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, unique=False)

@@ -12,7 +12,11 @@ class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
         fields = '__all__'
-        labels = {'startDateTime': ugettext_lazy('Start time'), 'endDateTime': ugettext_lazy('End Time'), 'user': ugettext_lazy('Patient')}
+        labels = {
+            'startDateTime': ugettext_lazy('Start time'),
+            'endDateTime': ugettext_lazy('End Time'),
+            'user': ugettext_lazy('Patient')
+        }
 
         widgets = {
             'startDateTime': DateTimeInput(attrs={'data': 'DateTimePicker', 'id': 'start_date_picker'}),

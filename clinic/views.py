@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, View, ListView, DetailView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
-from clinic.forms import AppointmentForm
+from clinic.forms import AppointmentForm, ManageFamilyDoctorForm
 from .filter import PatientFilter
 from .models import *
 
@@ -88,7 +88,15 @@ class DeleteAppointmentView(DeleteView):
         return reverse('patient_appointment_list', args=[patient_pk_])
 
 
-# @method_decorator(login_required, name='dispatch')
-# class PatientFamilyDoctorDetails(DetailView):
-#     model = FamilyDoctor
-#     template_name = 'clinic/patient/patient_family_doctor_partial.html'
+@method_decorator(login_required, name='dispatch')
+class FamilyDoctorCreate(CreateView):
+    model = FamilyDoctor
+    form_class = ManageFamilyDoctorForm
+    template_name = 'clinic/patient/patient_add_family_doctor.html'
+
+    def form_valid(self, form):
+        form.instance.patient = self.request.user.patient
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('home')

@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'appointment/(?P<pk>\d+)/$', clinic_views.AppointmentDetailsView.as_view(), name='appointment_details'),
     url(r'appointment/(?P<pk>\d+)/edit/$', clinic_views.EditAppointmentView.as_view(), name='appointment_edit'),
     url(r'appointment/(?P<pk>\d+)/delete/$', clinic_views.DeleteAppointmentView.as_view(), name='appointment_delete'),
+    url(r'patient/family_doctor/new', clinic_views.FamilyDoctorCreate.as_view(), name='family_doctor_create'),
 ]

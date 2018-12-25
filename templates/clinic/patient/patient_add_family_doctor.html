@@ -1,0 +1,25 @@
+{% load static %}
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for doctor in doctors %}
+            <tr>
+                <td><img class="img-thumbnail" src="{% static doctor.img %}" alt="Card image cap"></td>
+                <td>{{ doctor }}</td>
+                <td>{{ doctor.description }}</td>
+                <td><a href="#">Sign contract</a></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">No family doctors :(</td>
+            </tr>
+        {% endfor%}
+    </tbody>
+</table>

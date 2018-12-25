@@ -32,7 +32,7 @@ def patient_department_list(request):
 @login_required
 def department_doctors(request, pk):
     department = get_object_or_404(Department, pk=pk)
-    return render(request, 'clinic/doctor/department_doctors.html',  {'department': department},)
+    return render(request, 'clinic/doctor/department_doctors.html', {'department': department}, )
 
 
 @login_required
@@ -86,3 +86,9 @@ class DeleteAppointmentView(DeleteView):
     def get_success_url(self):
         patient_pk_ = self.request.user.pk
         return reverse('patient_appointment_list', args=[patient_pk_])
+
+
+# @method_decorator(login_required, name='dispatch')
+# class PatientFamilyDoctorDetails(DetailView):
+#     model = FamilyDoctor
+#     template_name = 'clinic/patient/patient_family_doctor_partial.html'

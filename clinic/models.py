@@ -106,3 +106,6 @@ class Message(models.Model):
 class FamilyDoctor(models.Model):
     patient = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, unique=False)
+
+    def __str__(self):
+        return self.patient.__str__() + ' --> ' + self.doctor.__str__()

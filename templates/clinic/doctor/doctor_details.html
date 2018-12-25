@@ -1,0 +1,37 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}{{ doctor }} details{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">{{ doctor }} details</li>
+{% endblock %}
+
+{% block content %}
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th colspan="2">{{ doctor }}</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td colspan="2"><img class="img-thumbnail" src="{% static doctor.img %}" alt="Card image cap"></td>
+            </tr>
+            <tr>
+                <th scope="row">Description</th>
+                <td>{{ doctor.description }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Department</th>
+                <td>{{ doctor.department }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Is family doctor?</th>
+                <td>{{ doctor.is_family_doctor }}</td>
+            </tr>
+    </tbody>
+</table>
+
+
+{% endblock %}

@@ -5,9 +5,13 @@
 {% endblock title %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{% url 'doctor_home' %}">Home</a></li>
+{% endblock %}
+
+{% block side_menu %}
+    {% include 'includes/doctor_side_menu.html' %}
 {% endblock %}
 
 {% block content %}
     <h2>Doctor home page</h2>
+    {% include 'clinic/doctor/doctor_appointment_list.html' %}
 {% endblock %}

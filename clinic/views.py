@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, View, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
 from clinic.forms import AppointmentForm, ManageFamilyDoctorForm
 from .filter import PatientFilter
@@ -100,3 +100,9 @@ class FamilyDoctorCreate(CreateView):
 
     def get_success_url(self):
         return reverse('home')
+
+
+@method_decorator(login_required, name='dispatch')
+class DoctorDetails(DetailView):
+    model = Doctor
+    template_name = 'clinic/doctor/doctor_details.html'

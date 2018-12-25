@@ -56,10 +56,6 @@ urlpatterns = [
     # patient urls
     url(r'^clinic/patient/$', clinic_views.home, name='home'),
     #
-    # doctor urls
-    url(r'^clinic/doctor/$', clinic_views.doctor_home, name='doctor_home'),
-    url(r'^clinic/departments/(?P<pk>\d+)/doctors/$', clinic_views.department_doctors, name='department_doctors'),
-    #
     # reception urls
     url(r'^clinic/reception/$', clinic_views.reception_home, name='reception_home'),
     #

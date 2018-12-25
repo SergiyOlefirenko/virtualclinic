@@ -12,7 +12,7 @@
         {% block body %}
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="{% url 'home' %}">Virtual clinic</a>
+                    <a class="navbar-brand" href="{% url 'redirect_view' %}">Virtual clinic</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -48,7 +48,7 @@
             </nav>
             <div class="container">
                 <ol class="breadcrumb my-4">
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'redirect_view' %}">Home</a></li>
                     {% block breadcrumb %}
                     {% endblock %}
                 </ol>

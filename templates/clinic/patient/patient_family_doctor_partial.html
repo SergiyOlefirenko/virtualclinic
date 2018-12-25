@@ -2,7 +2,7 @@
 
 {% block content %}
     {% if user.patient.familydoctor != '' %}
-        <h4>Your family doctor upcoming schedule</h4>
+        <h4>Your family doctor <a href="{% url 'doctor_details' user.patient.familydoctor.doctor.pk %}">{{user.patient.familydoctor.doctor}}</a> upcoming schedule</h4>
         {% show_family_doctor_appointments  user.patient %}
     {% else %}
         <h4>You don't have family doctor. Please sign select your family doctor!</h4>

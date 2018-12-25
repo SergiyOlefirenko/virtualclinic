@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, View, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
-from clinic.forms import AppointmentForm
+from clinic.forms import AppointmentForm, ManageFamilyDoctorForm
 from .filter import PatientFilter
 from .models import *
 
@@ -32,7 +32,7 @@ def patient_department_list(request):
 @login_required
 def department_doctors(request, pk):
     department = get_object_or_404(Department, pk=pk)
-    return render(request, 'clinic/doctor/department_doctors.html',  {'department': department},)
+    return render(request, 'clinic/doctor/department_doctors.html', {'department': department}, )
 
 
 @login_required
@@ -86,3 +86,23 @@ class DeleteAppointmentView(DeleteView):
     def get_success_url(self):
         patient_pk_ = self.request.user.pk
         return reverse('patient_appointment_list', args=[patient_pk_])
+
+
+@method_decorator(login_required, name='dispatch')
+class FamilyDoctorCreate(CreateView):
+    model = FamilyDoctor
+    form_class = ManageFamilyDoctorForm
+    template_name = 'clinic/patient/patient_add_family_doctor.html'
+
+    def form_valid(self, form):
+        form.instance.patient = self.request.user.patient
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('home')
+
+
+@method_decorator(login_required, name='dispatch')
+class DoctorDetails(DetailView):
+    model = Doctor
+    template_name = 'clinic/doctor/doctor_details.html'

@@ -39,6 +39,7 @@ class Doctor(models.Model):
     img = models.CharField(max_length=250)
     description = models.TextField(max_length=450)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, blank=True, null=True, related_name='doctors')
+    is_family_doctor = models.BooleanField(default=False)
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
@@ -101,3 +102,11 @@ class Message(models.Model):
     inclusion_date = models.DateTimeField()
     message = models.CharField(max_length=250)
     chat = models.OneToOneField(Chat, on_delete=models.CASCADE)
+
+
+class FamilyDoctor(models.Model):
+    patient = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, unique=False)
+
+    def __str__(self):
+        return self.patient.__str__() + ' --> ' + self.doctor.__str__()

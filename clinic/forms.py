@@ -5,14 +5,26 @@ from django.utils.translation import ugettext_lazy
 import datetime
 import pytz
 
-from .models import Appointment, Doctor, UserProfile, Service, AppointmentStatus
+from .models import Appointment, Doctor, FamilyDoctor
+
+
+class ManageFamilyDoctorForm(forms.ModelForm):
+    doctor = forms.ModelChoiceField(queryset=Doctor.objects.filter(is_family_doctor=True))
+
+    class Meta:
+        model = FamilyDoctor
+        fields = ['doctor']
 
 
 class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
         fields = '__all__'
-        labels = {'startDateTime': ugettext_lazy('Start time'), 'endDateTime': ugettext_lazy('End Time'), 'user': ugettext_lazy('Patient')}
+        labels = {
+            'startDateTime': ugettext_lazy('Start time'),
+            'endDateTime': ugettext_lazy('End Time'),
+            'user': ugettext_lazy('Patient')
+        }
 
         widgets = {
             'startDateTime': DateTimeInput(attrs={'data': 'DateTimePicker', 'id': 'start_date_picker'}),

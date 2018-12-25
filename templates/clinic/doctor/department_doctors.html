@@ -22,6 +22,7 @@
             <p class="card-text">{{ doctor.description }}</p>
         </div>
         <div class="card-footer">
+            <a href="{% url 'doctor_details' doctor.pk %}">Doctor details</a>
             <a href="#" class="card-link">Create appointment</a>
         </div>
     </div>

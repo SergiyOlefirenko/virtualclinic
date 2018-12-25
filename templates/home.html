@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block title %}
     Homepage - {{ block.super }}
 {% endblock title %}
@@ -8,4 +9,8 @@
 
 {% block side_menu %}
     {% include 'includes/side_menu.html' %}
+{% endblock %}
+
+{% block content %}
+    {% include 'clinic/patient/patient_family_doctor_partial.html' %}
 {% endblock %}
